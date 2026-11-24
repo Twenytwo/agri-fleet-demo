@@ -1,0 +1,61 @@
+<!doctype html>
+<html lang="it">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Agricultural Fleet - replay di simulazione</title>
+  <meta name="description" content="Replay di un volo reale su simulatore PX4 SITL della console Agricultural Fleet. Solo simulazione.">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.css"
+        integrity="sha512-Zcn6bjR/8RZbLEpLIeOwNtzREBAJnUKESxces60Mpoj+2okopSAcSUIUOseddDm0cxnGQzxIR7vJgsLZbdLE3w=="
+        crossorigin="anonymous" referrerpolicy="no-referrer">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="banner" role="note">Replay di simulazione &mdash; nessun drone reale. Registrazione di un volo su PX4 SITL; nessun comando, nessuna connessione a sistemi di volo.</div>
+  <main class="layout">
+    <section class="mapwrap">
+      <div id="map" aria-label="Mappa del campo e dei droni"></div>
+      <div class="player" aria-label="Controlli di riproduzione">
+        <button id="play" class="btn" aria-label="Riproduci">Play</button>
+        <button id="restart" class="btn btn-ghost" aria-label="Ricomincia">Da capo</button>
+        <div class="speeds" role="group" aria-label="Velocita">
+          <button class="btn btn-ghost speed" data-speed="1" aria-pressed="true">1x</button>
+          <button class="btn btn-ghost speed" data-speed="4" aria-pressed="false">4x</button>
+          <button class="btn btn-ghost speed" data-speed="16" aria-pressed="false">16x</button>
+        </div>
+        <input id="scrub" type="range" min="0" max="0" step="1" value="0" aria-label="Posizione nel replay">
+        <span id="clock" class="clock">0:00 / 0:00</span>
+      </div>
+    </section>
+    <aside class="panel">
+      <h1>Console flotta <span class="tag">replay</span></h1>
+      <p class="muted" id="meta">Caricamento...</p>
+      <section>
+        <h2>Stato volo</h2>
+        <div id="runstate" class="cards"></div>
+      </section>
+      <section>
+        <h2>Droni</h2>
+        <div id="vehicles"></div>
+      </section>
+      <section>
+        <h2>Avanzamento missione</h2>
+        <div id="progress"></div>
+      </section>
+      <section>
+        <h2>Copertura</h2>
+        <div id="coverage" class="cards"></div>
+      </section>
+      <section>
+        <h2>Registro di audit</h2>
+        <ol id="audit" class="audit"></ol>
+      </section>
+      <p class="foot muted">Il codice del sistema di controllo resta privato. Questa pagina e solo il replay statico di una simulazione.</p>
+    </aside>
+  </main>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.js"
+          integrity="sha512-BwHfrr4c9kmRkLw6iXFdzcdWV/PGkVgiIyIWLLlTSXzWQzxuSg4DiQUCpauz/EWjgk5TYQqX/kvn9pG1NpYfqg=="
+          crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  <script src="app.js"></script>
+</body>
+</html>
