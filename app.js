@@ -95,7 +95,11 @@
       card('Separazione minima', f.min_separation_m == null ? 'n.d.' : `${fmt(f.min_separation_m, 1)} m`),
       card('Tempo', mmss(f.t)));
     // droni
-    const rows = Object.entries(f.vehicles || {}).map(([d, v]) => el('tr', {},
+    let vs = f.vehicles || {};
+    if (!Object.keys(vs).length) {
+      for (let j = idx; j >= 0; j--) { if (Object.keys(frames[j].vehicles || {}).length) { vs = frames[j].vehicles; break; } }
+    }
+    const rows = Object.entries(vs).map(([d, v]) => el('tr', {},
       el('td', {}, el('span', { class: 'dot', style: `background:${colorOf(d)}` }), d),
       el('td', {}, (v.mode || 'n.d.') + (v.armed === false ? ' (disarmato)' : '')),
       el('td', {}, v.position ? fmt(v.position.relative_altitude_m, 1, ' m') : 'n.d.'),
