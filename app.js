@@ -45,7 +45,8 @@
         .bindTooltip(`${d} - rotta pianificata`).addTo(grp);
     });
     const b = grp.getBounds();
-    map.fitBounds(b.isValid() ? b.pad(0.3) : [[47.3981, 8.5463], [47.3985, 8.5469]]);
+    map.invalidateSize();
+    map.fitBounds(b.isValid() ? b.pad(0.1) : [[47.3981, 8.5463], [47.3985, 8.5469]], { maxZoom: 19 });
   }
 
   function ensureDrone(d, ll) {
