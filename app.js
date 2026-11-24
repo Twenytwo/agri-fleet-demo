@@ -174,9 +174,9 @@
     requestAnimationFrame(tick);
   }).catch((e) => { $('#meta').textContent = 'Impossibile caricare il replay: ' + e.message; });
 
-  $('#play').addEventListener('click', () => { if (idx >= frames.length - 1) render(0); setPlaying(!playing); });
-  $('#restart').addEventListener('click', () => { render(0); });
-  $('#scrub').addEventListener('input', (e) => { acc = 0; render(Number(e.target.value)); });
+  $('#play').addEventListener('click', () => { if (!frames.length) return; if (idx >= frames.length - 1) render(0); setPlaying(!playing); });
+  $('#restart').addEventListener('click', () => { if (frames.length) render(0); });
+  $('#scrub').addEventListener('input', (e) => { if (!frames.length) return; acc = 0; render(Number(e.target.value)); });
   document.querySelectorAll('.speed').forEach((b) => b.addEventListener('click', () => {
     speed = Number(b.dataset.speed);
     document.querySelectorAll('.speed').forEach((x) => x.setAttribute('aria-pressed', String(x === b)));
